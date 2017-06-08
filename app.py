@@ -1,4 +1,3 @@
-# encoding: utf-8
 from flask import Flask, request, abort
 
 from linebot import (
@@ -13,8 +12,9 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('') #Your Channel Access Token
-handler = WebhookHandler('') #Your Channel Secret
+line_bot_api = LineBotApi('c//eUJe6lMKtCicCrC9eCSE5pHZvRiCgavKE5bI6Jd8ujPcvCubtGWhUloHHixBOumFO6IRkKD+q9+AYcU/0tcylBJcaZpWUhotRTPJbQpLkjbzjjl8Q1UwTw60olaqh0fRR7qi3AEYzFej6zDDoyQdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('0fcee9d249316119f6d98b361a420b90')
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -33,15 +33,13 @@ def callback():
 
     return 'OK'
 
+
 @handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(event):
-    text = event.message.text #message from user
+def handle_message(event):
+    if even.message.text=='สวัสดี':
+	    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='ดีจ้า'))
+    else :
+            line_bot_api.reply_message(even.reply_token,TextSendMessage(text=even.message.text))
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=text)) #reply the same message from user
-    
-
-import os
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=os.environ['PORT'])
+    app.run()
